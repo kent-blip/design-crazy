@@ -73,10 +73,26 @@ function finishTest(){
   console.log("回答結果:", responses);
 
   const {score, total} = gradeResponses();
-  alert(`テスト終了！スコア: ${score}/${total}`);
+  alert(`テスト終了！`);
 
-  // JSONを自動ダウンロード
-  downloadJSON();
+  // ダウンロード確認
+  const shouldDownload = confirm("回答をJSONファイルとしてダウンロードしますか？");
+  if(shouldDownload){
+    downloadJSON();
+  }
+
+  problems = [];
+  responses = {};
+  remainingTime = 0;
+
+  // 問題パネルを空にする
+  document.getElementById('problemsContainer').innerHTML = '';
+  document.getElementById('timer').textContent = '';
+
+  // 画面を切り替え
+  document.getElementById('testPanel').classList.add('hidden');
+  document.getElementById('setupPanel').classList.remove('hidden');
+  // 
 }
 
 function gradeResponses() {
