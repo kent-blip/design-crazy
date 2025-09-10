@@ -1,0 +1,100 @@
+/* 全体のレイアウト */
+body {
+  font-family: "Helvetica Neue", "Arial", sans-serif;
+  background: linear-gradient(135deg, #f0f4f8, #ffffff);
+  margin: 0;
+  padding: 20px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* 見出し */
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 25px;
+  font-size: 2rem;
+}
+
+/* 問題カード */
+.question {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 650px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease;
+}
+
+.question:hover {
+  transform: translateY(-3px);
+}
+
+/* 選択肢（ラジオボタン/チェックボックス） */
+.question label {
+  display: block;
+  margin: 8px 0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.question input[type="radio"],
+.question input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.question label:hover {
+  background: #f0f7ff;
+}
+
+/* ボタン */
+button {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 18px;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background-color: #43a047;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.18);
+}
+
+/* 採点結果表示 */
+.result {
+  margin: 25px auto;
+  padding: 18px;
+  background: #e8f5e9;
+  border: 1px solid #c8e6c9;
+  border-radius: 12px;
+  max-width: 600px;
+  text-align: center;
+  font-weight: bold;
+  color: #2e7d32;
+  font-size: 1.1rem;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  body {
+    padding: 15px;
+  }
+  .question {
+    padding: 15px;
+  }
+  h1 {
+    font-size: 1.6rem;
+  }
+}
