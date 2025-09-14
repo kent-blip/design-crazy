@@ -8,6 +8,8 @@
 <body>
   <h1>デザイン思考トレーニング</h1>
 
+
+
   <!-- テスト設定パネル -->
   <div id="setupPanel">
     <label>問題数: <input id="numProblems" type="number" value="3"></label><br>
@@ -19,7 +21,7 @@
   <div id="testPanel" class="hidden">
     <div id="timer"></div>
     <div id="problemsContainer"></div>
-    <button onclick="finishTest()">回答を提出</button>
+  <button id="submitBtn" onclick="finishTest()">回答を提出</button>
   </div>
 
   <script src="design_crazy.js"></script>

@@ -3,11 +3,12 @@ let responses = {};
 let timerId;
 let remainingTime = 0;
 
+
 // 候補リスト
-const whoBase = ["学生","会社員","親","老婆","子供","研究者","エンジニア","観光客","アスリート","教師"];
+const whoBase = ["学生","会社員","親","神父","アーティスト","マフィア","医者","社長","老婆","子供","研究者","エンジニア","観光客","アスリート","教師"];
 const whoAdj  = ["忙しい","緊張しがちな","話好きな","初心者の","外国の","若い","高齢の","ベテランの","クリエイティブな","シャイな"];
 
-const whereBase = ["駅","学校","公園","キャンプ場","カフェ","病院","空港","図書館","オフィス","映画館"];
+const whereBase = ["駅","学校","ゴルフ場","コンビニ","道路","電車","別荘","公園","キャンプ場","カフェ","病院","空港","図書館","オフィス","映画館"];
 const whereAdj  = ["混雑した","静かな","遠い","近所の","未来的な","古びた","暗い","明るい","自然豊かな","高層の"];
 
 const whenBase = ["音楽を聴いているとき","走っているとき","くつろいでいるとき","考え事をしているとき","通勤中","旅行中","買い物中","勉強中","食事中","休憩中"];
@@ -96,6 +97,13 @@ function renderSelect(id, key, options, adj){
   `;
 }
 
+function updateCount(id, field, value) {
+  const counter = document.getElementById(`count-${field}-${id}`);
+  if (counter) {
+    counter.textContent = `${value.length}文字`;
+  }
+}
+
 function renderProblems(){
   const container = document.getElementById('problemsContainer');
   container.innerHTML = '';
@@ -110,14 +118,25 @@ function renderProblems(){
       <p><b>When修飾:</b> ${p.whenAdj}</p>
       <p><b>When候補:</b> ${renderSelect(p.id, 'when', p.whenOptions, p.whenAdj)}</p>
 
+
+      <div class="input-wrapper">
+      <label><b>Why:</b></label>
+      <textarea oninput="updateResponse(${p.id}, 'why', this.value); updateCount(${p.id}, 'why', this.value)"></textarea>
+      <div id="count-why-${p.id}" class="char-count">0文字</div>
+      </div>
+
       <p><b>What:</b><br>
         ${renderObjectSelect(p.id)}
         ${renderActionSelect(p.id)}
       </p>
 
-      <label>Why: <input type="text" oninput="updateResponse(${p.id}, 'why', this.value)"></label><br>
-      <label>How: <input type="text" oninput="updateResponse(${p.id}, 'how', this.value)"></label><br>
+      <div class="input-wrapper">
+      <label><b>How:</b></label>
+      <textarea oninput="updateResponse(${p.id}, 'how', this.value); updateCount(${p.id}, 'why', this.value)"></textarea>
+      <div id="count-how-${p.id}" class="char-count">0文字</div>
+      </div>
     `;
+      
     container.appendChild(div);
   });
 }
