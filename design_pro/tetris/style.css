@@ -1,0 +1,23 @@
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 10px;
+}
+
+body {
+    background-image: url("gravel.png");
+    background-repeat: repeat;
+    background-color: green;
+    background-size: auto;
+    color: white;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+canvas {
+    border-width: 20px;
+    border-style: solid;
+    border-image: url("wood-pattern.png") 30 round;
+    background: #111;
+}

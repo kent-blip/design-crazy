@@ -3,9 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>デザイン思考テスト</title>
-  <style>
-    .hidden { display: none; }
-  </style>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,16 +12,6 @@
   <div id="setupPanel">
     <label>問題数: <input id="numProblems" type="number" value="3"></label><br>
     <label>制限時間(分): <input id="timeLimit" type="number" value="30"></label><br><br>
-
-    <label>Who 候補 (カンマ区切り): <input id="whoInput" type="text" value="学生,会社員,親"></label><br>
-    <label>Who 修飾語: <input id="whoAdj" type="text" value="忙しい,若い,高齢の"></label><br>
-
-    <label>Where 候補: <input id="whereInput" type="text" value="駅,学校,公園"></label><br>
-    <label>Where 修飾語: <input id="whereAdj" type="text" value="混雑した,静かな,遠い"></label><br>
-
-    <label>When 候補: <input id="whenInput" type="text" value="朝,夜,休日"></label><br>
-    <label>When 修飾語: <input id="whenAdj" type="text" value="寒い,暑い,雨の日"></label><br><br>
-
     <button onclick="startTest()">テスト開始</button>
   </div>
 
@@ -35,6 +22,6 @@
     <button onclick="finishTest()">回答を提出</button>
   </div>
 
-  <script src="main.js"></script>
+  <script src="design_crazy.js"></script>
 </body>
 </html>
