@@ -29,10 +29,8 @@ const actions = [
   "分析する技術またはデータ"
 ];
 
-function startTest(){
-  const n = parseInt(document.getElementById('numProblems').value,10);
-  const minutes = parseInt(document.getElementById('timeLimit').value,10);
-
+function startTest(n, minutes){
+  document.body.style.backgroundImage = "none";
   problems = [];
   for(let i=0;i<n;i++){
     // adjはランダム1つ
@@ -186,26 +184,16 @@ function startTimer(){
   },1000);
 }
 
-function finishTest(){
+function finishTest() {
   clearInterval(timerId);
   console.log("回答結果:", responses);
-
-  const {score, total} = gradeResponses();
-  alert(`テスト終了！スコア: ${score}/${total}`);
-
-  const shouldDownload = confirm("回答をJSONファイルとしてダウンロードしますか？");
-  if(shouldDownload) downloadJSON();
-
-  problems = [];
-  responses = {};
-  remainingTime = 0;
-
-  document.getElementById('problemsContainer').innerHTML = '';
-  document.getElementById('timer').textContent = '';
-
-  document.getElementById('testPanel').classList.add('hidden');
-  document.getElementById('setupPanel').classList.remove('hidden');
+  const { score, total } = gradeResponses();
+  // ローカルストレージに保存して結果ページに渡す
+  localStorage.setItem("lastScore", JSON.stringify({ score, total, responses }));
+  // 結果ページに遷移
+  window.location.href = "result.html";
 }
+
 
 function gradeResponses() {
   let score = 0, total = 0;

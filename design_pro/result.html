@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>デザイン思考テスト - 結果</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>テスト結果</h1>
+  <div id="result"></div>
+  <button onclick="downloadJSON()">結果をJSONで保存</button>
+  <button onclick="location.href='index.html'">最初に戻る</button>
+
+  <script>
+    document.body.style.backgroundImage = "none";
+    const params = new URLSearchParams(window.location.search);
+    const score = params.get("score");
+    const total = params.get("total");
+    const data = JSON.parse(decodeURIComponent(params.get("data")));
+
+    document.getElementById("result").innerHTML =
+      `<p>スコア: ${score}/${total}</p>
+       <pre>${JSON.stringify(data, null, 2)}</pre>`;
+
+    function downloadJSON() {
+      const blob = new Blob([JSON.stringify(data, null, 2)], {type: "application/json"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "responses.json";
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>

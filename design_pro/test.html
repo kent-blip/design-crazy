@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>デザイン思考テスト - 実行</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>デザイン思考テスト</h1>
+
+  <div id="testPanel">
+    <div id="timer"></div>
+    <div id="problemsContainer"></div>
+    <button id="submitBtn" onclick="finishTest()">回答を提出</button>
+  </div>
+
+  <script src="design_crazy.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const numProblems = parseInt(params.get("numProblems"), 10) || 3;
+    const timeLimit = parseInt(params.get("timeLimit"), 10) || 30;
+
+    window.onload = () => {
+      startTest(numProblems, timeLimit);
+    };
+
+    // finishTestをオーバーライド
+    function finishTest() {
+      clearInterval(timerId);
+      const { score, total } = gradeResponses();
+      // JSONを文字列化してURLに乗せる（エンコード必須）
+      const jsonStr = encodeURIComponent(JSON.stringify(responses));
+      window.location.href = `result.html?score=${score}&total=${total}&data=${jsonStr}`;
+    }
+  </script>
+</body>
+</html>
+

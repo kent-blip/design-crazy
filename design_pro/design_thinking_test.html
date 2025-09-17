@@ -2,28 +2,28 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>デザイン思考テスト</title>
+  <title>デザイン思考テスト - スタート</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>デザイン思考トレーニング</h1>
 
-
-
   <!-- テスト設定パネル -->
   <div id="setupPanel">
     <label>問題数: <input id="numProblems" type="number" value="3"></label><br>
     <label>制限時間(分): <input id="timeLimit" type="number" value="30"></label><br><br>
-    <button onclick="startTest()">テスト開始</button>
+
+    <!-- 次のページにパラメータを渡す -->
+    <button onclick="goToTest()">テスト開始</button>
   </div>
 
-  <!-- テスト実行パネル -->
-  <div id="testPanel" class="hidden">
-    <div id="timer"></div>
-    <div id="problemsContainer"></div>
-  <button id="submitBtn" onclick="finishTest()">回答を提出</button>
-  </div>
-
-  <script src="design_crazy.js"></script>
+  <script>
+    function goToTest() {
+      const numProblems = document.getElementById('numProblems').value;
+      const timeLimit = document.getElementById('timeLimit').value;
+      // URLパラメータとして次ページに渡す
+      window.location.href = `test.html?numProblems=${numProblems}&timeLimit=${timeLimit}`;
+    }
+  </script>
 </body>
 </html>
