@@ -3,8 +3,8 @@ html, body {
   height: 100%; /* htmlも100%に */
 }
 
-body {
-  background-image: url('95342a97-da26-4073-869a-dbf3ed641234.png');
+body.start-bg {
+  background-image: url('images/95342a97-da26-4073-869a-dbf3ed641234.png');
   background-size: cover;    /* 画面全体にフィット */
   background-position: center;
   background-repeat: no-repeat;
@@ -12,8 +12,23 @@ body {
   padding: 0;
 }
 
+body.result-1-bg {
+  background-image: url('images/happy_Einstein.png');
+  background-size: 200px;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+}
 
-
+body.result-2-bg {
+  background-image: url('images/sad_Einstein.png');
+  background-size: 200px;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+}
 
 /* 見出し */
 h1 {

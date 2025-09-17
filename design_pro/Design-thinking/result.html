@@ -9,14 +9,20 @@
   <h1>テスト結果</h1>
   <div id="result"></div>
   <button onclick="downloadJSON()">結果をJSONで保存</button>
-  <button onclick="location.href='index.html'">最初に戻る</button>
+  <button onclick="location.href='start.html'">最初に戻る</button>
 
   <script>
-    document.body.style.backgroundImage = "none";
     const params = new URLSearchParams(window.location.search);
     const score = params.get("score");
     const total = params.get("total");
     const data = JSON.parse(decodeURIComponent(params.get("data")));
+
+    // スコアで背景を切り替え
+    if (score >= 6) {
+        document.body.classList.add("result-1-bg");
+    } else {
+        document.body.classList.add("result-2-bg");
+    }
 
     document.getElementById("result").innerHTML =
       `<p>スコア: ${score}/${total}</p>
