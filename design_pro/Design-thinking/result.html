@@ -7,35 +7,69 @@
 </head>
 <body>
   <h1>テスト結果</h1>
-  <div id="result"></div>
-  <button onclick="downloadJSON()">結果をJSONで保存</button>
-  <button onclick="location.href='start.html'">最初に戻る</button>
+  <div class="result-summary"></div>
+  <div class="card-container" id="result"></div>
+  <button onclick="goToEvaluation()">評価セッションに進む</button>
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const score = params.get("score");
-    const total = params.get("total");
+    const score = parseInt(params.get("score"), 10);
+    const total = parseInt(params.get("total"), 10);
     const data = JSON.parse(decodeURIComponent(params.get("data")));
+    const responses = data;  // responsesとして利用
 
-    // スコアで背景を切り替え
+    // 回答数で背景を切り替え
     if (score >= 6) {
-        document.body.classList.add("result-1-bg");
+      document.body.classList.add("result-1-bg");
     } else {
-        document.body.classList.add("result-2-bg");
+      document.body.classList.add("result-2-bg");
     }
 
-    document.getElementById("result").innerHTML =
-      `<p>スコア: ${score}/${total}</p>
-       <pre>${JSON.stringify(data, null, 2)}</pre>`;
+    // 上部にサマリー
+    document.querySelector(".result-summary").innerHTML =
+      `<p>回答数: ${score}/${total}</p>`;
 
+    const container = document.getElementById("result");
+
+    // 各問題の回答をカードとして表示
+    responses.problems.forEach((p, idx) => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <h3>アイデア ${idx + 1}</h3>
+        <p><strong>Who:</strong> ${p.who}</p>
+        <p><strong>Where:</strong> ${p.where}</p>
+        <p><strong>When:</strong> ${p.when}</p>
+        <p><strong>Why:</strong> ${p.why}</p>
+        <p><strong>What:</strong> ${p.what}</p>
+        <p><strong>How:</strong> ${p.how}</p>
+      `;
+      container.appendChild(card);
+    });
+
+    // JSON保存
     function downloadJSON() {
-      const blob = new Blob([JSON.stringify(data, null, 2)], {type: "application/json"});
+      const blob = new Blob([JSON.stringify(responses, null, 2)], { type: "application/json" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
       a.download = "responses.json";
       a.click();
       URL.revokeObjectURL(url);
+    }
+
+    // 評価セッションへ進む
+    function goToEvaluation() {
+      const ideas = responses.problems.map(p => ({
+        who: p.who,
+        where: p.where,
+        when: p.when,
+        what: p.what,
+        why: p.why,
+        how: p.how
+      }));
+      const nextUrl = "evaluate.html?ideas=" + encodeURIComponent(JSON.stringify(ideas));
+      window.location.href = nextUrl;
     }
   </script>
 </body>

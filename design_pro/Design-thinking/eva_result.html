@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>評価結果</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>評価結果</h1>
+  <div id="results"></div>
+  <button id="downloadBtn">JSON保存</button>
+  <button id="goFinalBtn">最終結果へ</button>
+
+  <script>
+  // URLから評価データを取得
+  const params = new URLSearchParams(window.location.search);
+  const resultsObj = JSON.parse(decodeURIComponent(params.get("data")));
+  const container = document.getElementById("results");
+
+  // オブジェクト → 配列に変換
+  const results = Object.keys(resultsObj).map(key => resultsObj[key]);
+
+  // 結果をカード表示
+  results.forEach((idea, idx) => {
+    const div = document.createElement("div");
+    div.classList.add("idea-card");
+    const total = idea.scores.q1 + idea.scores.q2 + idea.scores.q3 + idea.scores.q4;
+    div.innerHTML = `
+      <h3>アイデア ${idx+1}</h3>
+      <p><strong>Who:</strong> ${idea.text.who}</p>
+      <p><strong>Where:</strong> ${idea.text.where}</p>
+      <p><strong>When:</strong> ${idea.text.when}</p>
+      <p><strong>What:</strong> ${idea.text.what}</p>
+      <p><strong>Why:</strong> ${idea.text.why}</p>
+      <p><strong>How:</strong> ${idea.text.how}</p>
+      <h4>スコア</h4>
+      <ul>
+        <li>Q1: ${idea.scores.q1} 点</li>
+        <li>Q2: ${idea.scores.q2} 点</li>
+        <li>Q3: ${idea.scores.q3} 点</li>
+        <li>Q4: ${idea.scores.q4} 点</li>
+      </ul>
+      <p><strong>合計:</strong> ${total} 点</p>
+    `;
+    container.appendChild(div);
+  });
+
+  // JSON保存
+  document.getElementById("downloadBtn").addEventListener("click", () => {
+    const blob = new Blob([JSON.stringify(results, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "evaluation_results.json";
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  // 最終結果画面に遷移（配列のまま渡す）
+  document.getElementById("goFinalBtn").addEventListener("click", () => {
+    const dataStr = encodeURIComponent(JSON.stringify(results));
+    window.location.href = `final.html?data=${dataStr}`;
+  });
+  </script>
+</body>
+</html>

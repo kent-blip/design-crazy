@@ -130,7 +130,7 @@ function renderProblems(){
 
       <div class="input-wrapper">
       <label><b>How:</b></label>
-      <textarea oninput="updateResponse(${p.id}, 'how', this.value); updateCount(${p.id}, 'why', this.value)"></textarea>
+      <textarea oninput="updateResponse(${p.id}, 'how', this.value); updateCount(${p.id}, 'how', this.value)"></textarea>
       <div id="count-how-${p.id}" class="char-count">0文字</div>
       </div>
     `;
@@ -188,10 +188,11 @@ function finishTest() {
   clearInterval(timerId);
   console.log("回答結果:", responses);
   const { score, total } = gradeResponses();
-  // ローカルストレージに保存して結果ページに渡す
-  localStorage.setItem("lastScore", JSON.stringify({ score, total, responses }));
-  // 結果ページに遷移
-  window.location.href = "result.html";
+
+  // URLパラメータにデータを詰めて渡す
+  const dataStr = encodeURIComponent(JSON.stringify(responses));
+  const nextUrl = `result.html?score=${score}&total=${total}&data=${dataStr}`;
+  window.location.href = nextUrl;
 }
 
 
@@ -215,3 +216,5 @@ function downloadJSON() {
   a.click();
   URL.revokeObjectURL(url);
 }
+
+

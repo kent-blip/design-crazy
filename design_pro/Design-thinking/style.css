@@ -15,7 +15,7 @@ body.start-bg {
 body.result-1-bg {
   background-image: url('images/happy_Einstein.png');
   background-size: 200px;
-  background-position: center;
+  background-position: center 80%;
   background-repeat: no-repeat;
   margin: 0;
   padding: 0;
@@ -24,7 +24,7 @@ body.result-1-bg {
 body.result-2-bg {
   background-image: url('images/sad_Einstein.png');
   background-size: 200px;
-  background-position: center;
+  background-position: center 80%;
   background-repeat: no-repeat;
   margin: 0;
   padding: 0;
@@ -36,6 +36,22 @@ h1 {
   color: #2c3e50;
   margin-bottom: 25px;
   font-size: 2rem;
+}
+
+/* 小見出し */
+h2 {
+  text-align: left; 
+  color: #2c3e50;
+  margin-bottom: 25px;
+  font-size: 1.5rem;
+}
+
+/* 文章 */
+h3 {
+  text-align: left;
+  color: #2c3e50;
+  margin-bottom: 25px;
+  font-size: 1rem;
 }
 
 /* 問題カード */
@@ -145,18 +161,11 @@ button:hover {
   box-shadow: 0 6px 12px rgba(0,0,0,0.18);
 }
 
-/* 採点結果表示 */
-.result {
-  margin: 25px auto;
-  padding: 18px;
-  background: #e8f5e9;
-  border: 1px solid #c8e6c9;
-  border-radius: 12px;
-  max-width: 600px;
-  text-align: center;
-  font-weight: bold;
-  color: #2e7d32;
-  font-size: 1.1rem;
+.result-summary {
+  font-size: 1.5em;  /* 通常の1.5倍 */
+  font-weight: bold; /* 太字にする場合 */
+  text-align: center; /* 中央揃えにしたい場合 */
+  margin: 20px 0; /* 上下に余白 */
 }
 
 /* レスポンシブ対応 */
@@ -171,3 +180,79 @@ button:hover {
     font-size: 1.6rem;
   }
 }
+
+.card {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 18px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  background: #fff;
+  border-radius: 12px;
+  max-width: 500px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+}
+.card h3 {
+  margin-top: 0;
+  font-size: 1.2em;
+  color: #333;
+}
+.card p {
+  margin: 4px 0;
+  color: #555;
+}
+
+
+.idea-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 15px;
+  margin: 15px auto;
+  max-width: 600px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.idea-card h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.idea-card label {
+  display: block;
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+body.result-page {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.result-summary h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.idea-card {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: #f9f9f9;
+}
+
+/* ランクカラー */
+.rank-SSS { border-color: gold; background-color: #fffbe6; }
+.rank-SS  { border-color: silver; background-color: #f0f0f0; }
+.rank-S   { border-color: #9acd32; background-color: #f9fff0; }
+.rank-A   { border-color: #1e90ff; background-color: #f0f8ff; }
+.rank-B   { border-color: #ffa500; background-color: #fff4e0; }
+.rank-C   { border-color: #ff4500; background-color: #fff0f0; }
+.rank-D   { border-color: #c0c0c0; background-color: #f5f5f5; }
+.rank-E   { border-color: #808080; background-color: #f5f5f5; }
